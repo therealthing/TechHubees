@@ -70,11 +70,12 @@ Food.getInsta = function(tag) {
     }).then(function(data) {
 
         var imgArray = [];
-        for (var i = 0; i < data.data.length; i++) {
+        /*for (var i = 0; i < data.data.length; i++) {
             imgArray.push(data.data[i].images.standard_resolution.url);
         }
 
-        deferred.resolve(imgArray);
+        deferred.resolve(imgArray);*/
+        deferred.resolve(data.data);
     });
     return deferred.promise();
 }
