@@ -22,7 +22,37 @@ var EventSystem = (function() {
     }
   };
 }());
-
+var Ingredient = React.createClass({
+    getInitialState: function(){
+      return {
+        photo: ''
+      }
+    },
+    getDefaultProps: function(){
+      return {
+        label: null
+      }
+    },
+    componentDidMount: function(){
+      this.updatePhoto();
+    },
+    componentDidUpdate: function(){
+      this.updatePhoto();
+    },
+    render: function(){
+      return (<div className="col-md-3 col-sm-6 hero-feature">
+                  <div className="thumbnail">
+                      <img src={this.state.photo} alt={this.props.label}/>
+                      <div className="caption">
+                          <h3>{this.props.label}</h3>
+                      </div>
+                  </div>
+              </div>);
+    },
+    updatePhoto: function() {
+     ;
+    }
+});
 var ListingIngredients = React.createClass({
     getDefaultProps: function(){
       return {
@@ -32,18 +62,10 @@ var ListingIngredients = React.createClass({
     render: function(){
       return (
         <div className="row">
-          {this.props.ingredients.map(function(ingredient){
-            if(ingredient!='')
-              return <div className="col-md-3 col-sm-6 hero-feature">
-                  <div className="thumbnail">
-                      <img src="{ingredient.photo}" alt=""/>
-                      <div className="caption">
-                          <h3>{ingredient}</h3>
-                      </div>
-                  </div>
-              </div>;
-              else 
-                return '';
+          {this.props.ingredients.filter(function(ingredient) {
+            return ingredient !== '';
+          }).map(function(ingredient, i){
+            return <Ingredient key={i} label={ingredient} />;
           }
           )}
         </div>
@@ -62,24 +84,29 @@ var FoodApp = React.createClass({
           //api calls
           console.log('comp will mount');
           window.addEventListener('keydown', this.handleChange);
+
+          this.handleChange = _.debounce(this.handleChange, 500);
         },
         componentDidMount: function(){
           console.log('comp did mount');
         },
         handleChange: function(e){
-          console.log('text changes');
           var userInput = this.refs.inputSearch.getDOMNode().value.trim();
           this.setState({
             ingredients: userInput.split(',')
           });
+        
+          Food.getIngredients(userInput.split(','))
+            .then(function(data){
+               console.log(data); 
+          }); 
+      
         },
         componentWillUnmount: function(){
           window.removeEventListener('keydown', this.handleChange);
         },
         render: function() {
-          var message =
-            'React is running successfully';
-
+         
           return (
               <section>
                 <header className="jumbotron hero-spacer">
