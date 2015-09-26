@@ -13,7 +13,7 @@ Food.getRecipes = function(ingredients) {
             "X-Mashape-Key": "jis02SUQJVmsh25L1vfXvYhJAvxyp1AaDFAjsndi1cy5fhnK8H"
         }
     }).then(function(data) {
-        console.log(data);
+        
         Food.getInsta(data[0].title);
         deferred.resolve(data);
     });
@@ -40,8 +40,8 @@ Food.getInsta = function(tag) {
         for (var i = 0; i < data.data.length; i++) {
             imgArray.push(data.data[i].images.standard_resolution.url);
         }
-        console.log(imgArray);
-        deferred.resolve(data);
+        
+        deferred.resolve(imgArray);
     });
     return deferred.promise();
 }
