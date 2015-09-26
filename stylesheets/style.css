@@ -226,7 +226,7 @@ Image placeholders: placemi.com
 /********************************/
 /*          Panel cards         */
 /********************************/
-/* line 77, ../sass/style.scss */
+/* line 78, ../sass/style.scss */
 .panel.panel-card {
   position: relative;
   height: 238px;
@@ -234,7 +234,7 @@ Image placeholders: placemi.com
   overflow: hidden;
 }
 
-/* line 83, ../sass/style.scss */
+/* line 84, ../sass/style.scss */
 .panel.panel-card .panel-heading {
   position: relative;
   z-index: 2;
@@ -245,7 +245,7 @@ Image placeholders: placemi.com
   transition: height 600ms ease-in-out;
 }
 
-/* line 93, ../sass/style.scss */
+/* line 94, ../sass/style.scss */
 .panel.panel-card .panel-heading img {
   position: absolute;
   top: 50%;
@@ -256,7 +256,7 @@ Image placeholders: placemi.com
   transform: translate3d(-50%, -50%, 0);
 }
 
-/* line 103, ../sass/style.scss */
+/* line 104, ../sass/style.scss */
 .panel.panel-card .panel-heading button {
   position: absolute;
   top: 10px;
@@ -264,7 +264,7 @@ Image placeholders: placemi.com
   z-index: 3;
 }
 
-/* line 109, ../sass/style.scss */
+/* line 110, ../sass/style.scss */
 .panel.panel-card .panel-figure {
   position: absolute;
   top: auto;
@@ -283,7 +283,7 @@ Image placeholders: placemi.com
   transition: opacity 400ms ease-in-out;
 }
 
-/* line 129, ../sass/style.scss */
+/* line 130, ../sass/style.scss */
 .panel.panel-card .panel-body {
   padding-top: 40px;
   padding-bottom: 20px;
@@ -291,12 +291,12 @@ Image placeholders: placemi.com
   transition: padding 400ms ease-in-out;
 }
 
-/* line 137, ../sass/style.scss */
+/* line 138, ../sass/style.scss */
 .panel.panel-card .panel-thumbnails {
   padding: 0 15px 20px;
 }
 
-/* line 140, ../sass/style.scss */
+/* line 141, ../sass/style.scss */
 .panel-thumbnails .thumbnail {
   width: 60px;
   max-width: 100%;
@@ -304,32 +304,31 @@ Image placeholders: placemi.com
   background-color: #fff;
 }
 
-/* line 148, ../sass/style.scss */
+/* line 149, ../sass/style.scss */
 .panel.panel-card:hover .panel-heading {
   height: 55px;
   -webkit-transition: height 400ms ease-in-out;
   transition: height 400ms ease-in-out;
 }
 
-/* line 154, ../sass/style.scss */
+/* line 155, ../sass/style.scss */
 .panel.panel-card:hover .panel-figure {
   opacity: 0;
   -webkit-transition: opacity 400ms ease-in-out;
   transition: opacity 400ms ease-in-out;
 }
 
-/* line 160, ../sass/style.scss */
+/* line 161, ../sass/style.scss */
 .panel.panel-card:hover .panel-body {
   padding-top: 20px;
   -webkit-transition: padding 400ms ease-in-out;
   transition: padding 400ms ease-in-out;
 }
 
-/* line 169, ../sass/style.scss */
+/* line 170, ../sass/style.scss */
 .panel {
   height: 250px;
   width: 250px;
-  margin: 0 auto;
   animation-name: stretch;
   animation-duration: 0.5s;
   animation-timing-function: ease-out;
