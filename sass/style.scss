@@ -65,7 +65,7 @@ Image placeholders: placemi.com
 
 
 #t-cards {
-    padding-top: 80px;
+    padding-top: 30px;
     padding-bottom: 80px;
     display: flex;
     justify-content: center;
@@ -171,7 +171,7 @@ Image placeholders: placemi.com
     width: 250px;
     margin: 0 auto;
     animation-name: stretch;
-    animation-duration: 1.0s;
+    animation-duration: 0.5s;
     animation-timing-function: ease-out;
     animation-delay: 0;
     animation-direction: alternate;
@@ -186,6 +186,11 @@ Image placeholders: placemi.com
     100% {
         transform: scale(1);
     }
+}
+
+.btn-success {
+    padding: 10px 34px;
+    font-weight: 700;
 }
 
 
