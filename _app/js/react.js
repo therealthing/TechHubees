@@ -34,10 +34,10 @@ var Ingredient = React.createClass({displayName: "Ingredient",
       }
     },
     componentDidMount: function(){
-      this.mymethod();
+      this.updatePhoto();
     },
     componentDidUpdate: function(){
-      this.mymethod();
+      this.updatePhoto();
     },
     render: function(){
       return (React.createElement("div", {className: "col-md-3 col-sm-6 hero-feature"}, 
@@ -49,8 +49,8 @@ var Ingredient = React.createClass({displayName: "Ingredient",
                   )
               ));
     },
-    mymethod: function() {
-      console.log('pulling photo for '+this.props.label);
+    updatePhoto: function() {
+     ;
     }
 });
 var ListingIngredients = React.createClass({displayName: "ListingIngredients",
@@ -95,6 +95,12 @@ var FoodApp = React.createClass({displayName: "FoodApp",
           this.setState({
             ingredients: userInput.split(',')
           });
+        
+          Food.getIngredients(userInput.split(','))
+            .then(function(data){
+               console.log(data); 
+          }); 
+      
         },
         componentWillUnmount: function(){
           window.removeEventListener('keydown', this.handleChange);
