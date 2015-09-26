@@ -42,6 +42,23 @@ var Ingredient = React.createClass({displayName: "Ingredient",
               ));
     }
 });
+var Recipe = React.createClass({displayName: "Recipe",
+    getDefaultProps: function(){
+      return {
+        photo: ''
+      }
+    },
+    render: function(){
+      return (React.createElement("div", {className: "col-md-3 col-sm-6 hero-feature"}, 
+                  React.createElement("div", {className: "thumbnail"}, 
+                      React.createElement("img", {src: this.props.photo, alt: this.props.label}), 
+                      React.createElement("div", {className: "caption"}, 
+                          React.createElement("h3", null, this.props.label)
+                      )
+                  )
+              ));
+    }
+});
 var ListingIngredients = React.createClass({displayName: "ListingIngredients",
     getDefaultProps: function(){
       return {
@@ -66,17 +83,36 @@ var ListingIngredients = React.createClass({displayName: "ListingIngredients",
     }
 });
 
+var ListingRecipes = React.createClass({displayName: "ListingRecipes",
+    getDefaultProps: function(){
+      return {
+        photos: []
+      }
+    },
+    render: function(){
+      return (
+        React.createElement("div", {className: "row"}, 
+            this.props.recipes.filter(function(recipe) {
+            return recipe.title !== '';
+          }).map(function(recipe, i){
+            return React.createElement(Recipe, {key: i, photo: recipe.image, label: recipe.title});
+          }, this)
+        )
+      );
+    }
+});
+
 var FoodApp = React.createClass({displayName: "FoodApp",
         getInitialState: function() {
           console.log('get initial state');
           return {
             ingredients: [],
-            photos: []
+            photos: [],
+            recipes: []
           }
         },
         componentWillMount: function(){
           //api calls
-          console.log('comp will mount');
           window.addEventListener('keydown', this.handleChange);
 
           this.handleChange = _.debounce(this.handleChange, 1000);
@@ -93,7 +129,11 @@ var FoodApp = React.createClass({displayName: "FoodApp",
               .then(function(data){
                 that.setState({photos:data});
             });  
-
+            Food.getRecipes(userInput)
+              .then(function(data){
+                console.log(data);
+                that.setState({recipes:data});
+              });  
             ingredientsCount = newCount;  
           }
            
@@ -124,7 +164,11 @@ var FoodApp = React.createClass({displayName: "FoodApp",
                     )
                   ), 
                   React.createElement("div", {className: "row text-center"}, 
-                      React.createElement(ListingIngredients, {ingredients: this.state.ingredients, photos: this.state.photos})
+                      React.createElement("h3", null, "Your ingredients"), 
+                      React.createElement(ListingIngredients, {ingredients: this.state.ingredients, photos: this.state.photos}), 
+                      React.createElement("h3", null, "You can cook"), 
+                      React.createElement("hr", null), 
+                      React.createElement(ListingRecipes, {recipes: this.state.recipes})
                   )
                 )
             );

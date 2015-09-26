@@ -42,6 +42,23 @@ var Ingredient = React.createClass({
               </div>);
     }
 });
+var Recipe = React.createClass({
+    getDefaultProps: function(){
+      return {
+        photo: ''
+      }
+    },
+    render: function(){
+      return (<div className="col-md-3 col-sm-6 hero-feature">
+                  <div className="thumbnail">
+                      <img src={this.props.photo} alt={this.props.label}/>
+                      <div className="caption">
+                          <h3>{this.props.label}</h3>
+                      </div>
+                  </div>
+              </div>);
+    }
+});
 var ListingIngredients = React.createClass({
     getDefaultProps: function(){
       return {
@@ -66,17 +83,36 @@ var ListingIngredients = React.createClass({
     }
 });
 
+var ListingRecipes = React.createClass({
+    getDefaultProps: function(){
+      return {
+        photos: []
+      }
+    },
+    render: function(){
+      return (
+        <div className="row">
+            {this.props.recipes.filter(function(recipe) {
+            return recipe.title !== '';
+          }).map(function(recipe, i){
+            return <Recipe key={i} photo={recipe.image} label={recipe.title}/>;
+          }, this)}
+        </div>
+      );
+    }
+});
+
 var FoodApp = React.createClass({
         getInitialState: function() {
           console.log('get initial state');
           return {
             ingredients: [],
-            photos: []
+            photos: [],
+            recipes: []
           }
         },
         componentWillMount: function(){
           //api calls
-          console.log('comp will mount');
           window.addEventListener('keydown', this.handleChange);
 
           this.handleChange = _.debounce(this.handleChange, 1000);
@@ -93,7 +129,11 @@ var FoodApp = React.createClass({
               .then(function(data){
                 that.setState({photos:data});
             });  
-
+            Food.getRecipes(userInput)
+              .then(function(data){
+                console.log(data);
+                that.setState({recipes:data});
+              });  
             ingredientsCount = newCount;  
           }
            
@@ -124,7 +164,11 @@ var FoodApp = React.createClass({
                     </div>    
                   </header>
                   <div className="row text-center">
+                      <h3>Your ingredients</h3>
                       <ListingIngredients ingredients={this.state.ingredients} photos={this.state.photos}/>
+                      <h3>You can cook</h3>
+                      <hr/>
+                      <ListingRecipes recipes={this.state.recipes}/>
                   </div>
                 </section>
             );
