@@ -1,4 +1,6 @@
 var eventQueue = {};
+var ingredientsCount = 0;
+var photos = {};
 
 /*dispatcher*/
 var EventSystem = (function() {
@@ -85,7 +87,7 @@ var FoodApp = React.createClass({displayName: "FoodApp",
           console.log('comp will mount');
           window.addEventListener('keydown', this.handleChange);
 
-          this.handleChange = _.debounce(this.handleChange, 500);
+          this.handleChange = _.debounce(this.handleChange, 1000);
         },
         componentDidMount: function(){
           console.log('comp did mount');
@@ -95,11 +97,17 @@ var FoodApp = React.createClass({displayName: "FoodApp",
           this.setState({
             ingredients: userInput.split(',')
           });
-        
-          Food.getIngredients(userInput.split(','))
-            .then(function(data){
-               console.log(data); 
-          }); 
+          var newCount = userInput.length;
+          if(ingredientsCount!= newCount){
+            
+            Food.getIngredients(userInput.split(','))
+              .then(function(data){
+                photos = data;
+            });  
+
+            ingredientsCount = newCount;  
+          }
+           
       
         },
         componentWillUnmount: function(){
