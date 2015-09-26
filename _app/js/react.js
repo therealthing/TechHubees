@@ -1,4 +1,6 @@
 var eventQueue = {};
+var ingredientsCount = 0;
+var photos = {};
 
 /*dispatcher*/
 var EventSystem = (function() {
@@ -23,40 +25,45 @@ var EventSystem = (function() {
   };
 }());
 var Ingredient = React.createClass({displayName: "Ingredient",
-    getInitialState: function(){
-      return {
-        photo: ''
-      }
-    },
     getDefaultProps: function(){
       return {
-        label: null
+        label: null,
+        photo: ''
       }
-    },
-    componentDidMount: function(){
-      this.updatePhoto();
-    },
-    componentDidUpdate: function(){
-      this.updatePhoto();
     },
     render: function(){
       return (React.createElement("div", {className: "col-md-3 col-sm-6 hero-feature"}, 
                   React.createElement("div", {className: "thumbnail"}, 
-                      React.createElement("img", {src: this.state.photo, alt: this.props.label}), 
+                      React.createElement("img", {src: this.props.photo, alt: this.props.label}), 
                       React.createElement("div", {className: "caption"}, 
                           React.createElement("h3", null, this.props.label)
                       )
                   )
               ));
+    }
+});
+var Recipe = React.createClass({displayName: "Recipe",
+    getDefaultProps: function(){
+      return {
+        photo: ''
+      }
     },
-    updatePhoto: function() {
-     ;
+    render: function(){
+      return (React.createElement("div", {className: "col-md-3 col-sm-6 hero-feature"}, 
+                  React.createElement("div", {className: "thumbnail"}, 
+                      React.createElement("img", {src: this.props.photo, alt: this.props.label}), 
+                      React.createElement("div", {className: "caption"}, 
+                          React.createElement("h3", null, this.props.label)
+                      )
+                  )
+              ));
     }
 });
 var ListingIngredients = React.createClass({displayName: "ListingIngredients",
     getDefaultProps: function(){
       return {
-        ingredients: []
+        ingredients: [],
+        photos: []
       }
     },
     render: function(){
@@ -65,9 +72,31 @@ var ListingIngredients = React.createClass({displayName: "ListingIngredients",
           this.props.ingredients.filter(function(ingredient) {
             return ingredient !== '';
           }).map(function(ingredient, i){
-            return React.createElement(Ingredient, {key: i, label: ingredient});
-          }
-          )
+            var matchingImages = this.props.photos.filter(function(photo) {
+              return photo.original === ingredient;
+            });
+            var currentImage = matchingImages.length > 0 ? matchingImages[0].image : null;
+            return React.createElement(Ingredient, {key: i, label: ingredient, photo: currentImage});
+          }, this)
+        )
+      );
+    }
+});
+
+var ListingRecipes = React.createClass({displayName: "ListingRecipes",
+    getDefaultProps: function(){
+      return {
+        photos: []
+      }
+    },
+    render: function(){
+      return (
+        React.createElement("div", {className: "row"}, 
+            this.props.recipes.filter(function(recipe) {
+            return recipe.title !== '';
+          }).map(function(recipe, i){
+            return React.createElement(Recipe, {key: i, photo: recipe.image, label: recipe.title});
+          }, this)
         )
       );
     }
@@ -77,29 +106,37 @@ var FoodApp = React.createClass({displayName: "FoodApp",
         getInitialState: function() {
           console.log('get initial state');
           return {
-            ingredients: []
+            ingredients: [],
+            photos: [],
+            recipes: []
           }
         },
         componentWillMount: function(){
           //api calls
-          console.log('comp will mount');
           window.addEventListener('keydown', this.handleChange);
 
-          this.handleChange = _.debounce(this.handleChange, 500);
-        },
-        componentDidMount: function(){
-          console.log('comp did mount');
+          this.handleChange = _.debounce(this.handleChange, 1000);
         },
         handleChange: function(e){
           var userInput = this.refs.inputSearch.getDOMNode().value.trim();
           this.setState({
-            ingredients: userInput.split(',')
+            ingredients: userInput.split(',').map(_.trim)
           });
-        
-          Food.getIngredients(userInput.split(','))
-            .then(function(data){
-               console.log(data); 
-          }); 
+          var newCount = userInput.length;
+          if(ingredientsCount!= newCount){
+            var that = this;
+            Food.getIngredients(userInput.split(','))
+              .then(function(data){
+                that.setState({photos:data});
+            });  
+            Food.getRecipes(userInput)
+              .then(function(data){
+                console.log(data);
+                that.setState({recipes:data});
+              });  
+            ingredientsCount = newCount;  
+          }
+           
       
         },
         componentWillUnmount: function(){
@@ -127,7 +164,11 @@ var FoodApp = React.createClass({displayName: "FoodApp",
                     )
                   ), 
                   React.createElement("div", {className: "row text-center"}, 
-                      React.createElement(ListingIngredients, {ingredients: this.state.ingredients})
+                      React.createElement("h3", null, "Your ingredients"), 
+                      React.createElement(ListingIngredients, {ingredients: this.state.ingredients, photos: this.state.photos}), 
+                      React.createElement("h3", null, "You can cook"), 
+                      React.createElement("hr", null), 
+                      React.createElement(ListingRecipes, {recipes: this.state.recipes})
                   )
                 )
             );
