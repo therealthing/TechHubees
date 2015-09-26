@@ -1,4 +1,3 @@
-/*
 body,
 html {
     width: 100%;
@@ -6,17 +5,15 @@ html {
 
 }
 
-#Contact, #About, #Portfolio {
-    height: 100%;
-    padding-top: 20px;
-}
-
 .jumbotron {
-    height: 760px;
-    padding-top: 50px; /!* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! *!/
+    padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
     text-align: center;
-    background: url('https://images.unsplash.com/photo-1426869884541-df7117556757?q=80&fm=jpg&s=a96e2a65771dd939883420703a0bb928')  center center ;
+    background-image: url(../images/cupcakes.jpeg);
+    background-position: center;
     background-size: cover;
+    h1,p {
+        color: white;
+    }
 }
 
 #header {
@@ -42,9 +39,3 @@ html {
     float: right;
     margin-top: 0;
 }
-
-.container {
-
-    width:40%;
-    margin-top: -3%;
-}*/
