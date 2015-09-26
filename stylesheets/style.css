@@ -1,0 +1,52 @@
+/*
+body,
+html {
+    width: 100%;
+    height: 100%;
+
+}
+
+#Contact, #About, #Portfolio {
+    height: 100%;
+    padding-top: 20px;
+}
+
+.jumbotron {
+    height: 760px;
+    padding-top: 50px; /!* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! *!/
+    text-align: center;
+    background: url('https://images.unsplash.com/photo-1426869884541-df7117556757?q=80&fm=jpg&s=a96e2a65771dd939883420703a0bb928')  center center ;
+    background-size: cover;
+}
+
+#header {
+    color: rgba(240, 240, 255, 1);
+    background-color: rgba(0,0,65,0.5)
+}
+
+#sub-header {
+    color: rgba(0,0,65,0.5);
+    background-color: rgba(240, 240, 255, 1);
+}
+
+.intro-message {
+    position: relative;
+    padding-top: 20%;
+}
+
+.intro-divider {
+    color: #fff;
+}
+
+.banner-social-buttons {
+    float: right;
+    margin-top: 0;
+}
+
+.container {
+
+    width:40%;
+    margin-top: -3%;
+}*/
+
+/*# sourceMappingURL=style.css.map */
