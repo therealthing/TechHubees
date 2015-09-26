@@ -17,13 +17,13 @@ var gulp = require('gulp'),
 	babel = require('gulp-babel');
 
 var bases = {
-	app: './',
+	app: '_app/',
 	dist: './'
 };
 
 var paths = {
-	scripts: ['js/*.js'],
-	jsx: ['js/*.jsx']
+	scripts: ['js/**/*.js'],
+	jsx: ['js/**/*.jsx']
 };
 
 
@@ -58,18 +58,9 @@ gulp.task('clean', function(cb) {
 			bases.dist + 'js/app.min.js']);
 });
 
-// Server
-gulp.task('connect', function() {
-  connect.server({
-    root: [__dirname],
-    port: 8000,
-    livereload: true
-  });
-});
-
 // Default task
 gulp.task('default', function() {
-	gulp.start('react', 'scripts', 'watch', 'connect');
+	gulp.start('clean','react', 'scripts', 'watch');
 });
 
 // Watch
