@@ -14,17 +14,17 @@ Food.getRecipes = function(ingredients) {
         }
     }).then(function(data) {
 
-         
+
         deferred.resolve(data);
     });
     return deferred.promise();
 }
 
 Food.getIngredients = function(ingredients) {
-    var ing="";
-    for(var i=0; i<ingredients.length;i++){
+    var ing = "";
+    for (var i = 0; i < ingredients.length; i++) {
         ing += ingredients[i];
-        ing +="\n";
+        ing += "\n";
     }
     var deferred = $.Deferred();
     $.ajax({
@@ -34,19 +34,25 @@ Food.getIngredients = function(ingredients) {
             "X-Mashape-Key": "jis02SUQJVmsh25L1vfXvYhJAvxyp1AaDFAjsndi1cy5fhnK8H",
             "Content-Type": "application/x-www-form-urlencoded"
         },
-        data : {
-            ingredientList:ing,
-            servings :1
-        } 
+        data: {
+            ingredientList: ing,
+            servings: 1
+        }
 
-    }).then(function(data){
-       
+    }).then(function(data) {
+        var arrayPhotos = [];
+        for (var i = 0; i < data.length; i++) {
+            arrayPhotos.push({
+                name: data[i].name,
+                url: data[i].image
+            });
+        }
         deferred.resolve(data)
 
     });
-     return deferred.promise();
+    return deferred.promise();
 }
-Food.getIngredients(["pork","milk","salt"]);
+
 
 Food.getInsta = function(tag) {
     tag = tag.replace(" ", "");
@@ -72,5 +78,3 @@ Food.getInsta = function(tag) {
     });
     return deferred.promise();
 }
-
- 
