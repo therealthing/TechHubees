@@ -1,0 +1,35 @@
+{
+  "name": "VisualDelight",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browserify": "latest",
+    "crossroads": "^0.12.0",
+    "del": "latest",
+    "gulp": "latest",
+    "gulp-autoprefixer": "latest",
+    "gulp-babel": "^5.1.0",
+    "gulp-concat": "latest",
+    "gulp-connect": "latest",
+    "gulp-copy": "0.0.2",
+    "gulp-livereload": "latest",
+    "gulp-notify": "latest",
+    "gulp-react": "^3.0.1",
+    "gulp-rename": "latest",
+    "gulp-sass": "latest",
+    "gulp-sourcemaps": "latest",
+    "gulp-sprite-glue": "latest",
+    "gulp-uglify": "latest",
+    "gulp-util": "latest",
+    "signals": "^1.0.0"
+  },
+  "dependencies": {
+    "moment": "^2.10.0"
+  }
+}
