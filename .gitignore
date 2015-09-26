@@ -1,3 +1,6 @@
-node_modules
+node_modules 
 js/app.js
-js/app.min.js
+js/app.min.js 
+.sass-cache
+.idea
+sass

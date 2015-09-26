@@ -1,0 +1,200 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway:400,700");
+/* line 11, ../sass/_bootswatch.scss */
+.navbar {
+  font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+/* line 14, ../sass/_bootswatch.scss */
+.navbar-nav, .navbar-form {
+  margin-left: 0;
+  margin-right: 0;
+}
+/* line 20, ../sass/_bootswatch.scss */
+.navbar-nav > li > a {
+  margin: 12.5px 6px;
+  padding: 8px 12px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+/* line 27, ../sass/_bootswatch.scss */
+.navbar-nav > li > a:hover {
+  border: 1px solid #ddd;
+}
+/* line 32, ../sass/_bootswatch.scss */
+.navbar-nav > .active > a, .navbar-nav > .active > a:hover {
+  border: 1px solid #ddd;
+}
+/* line 37, ../sass/_bootswatch.scss */
+.navbar-default .navbar-nav > .active > a:hover {
+  color: #4582EC;
+}
+/* line 41, ../sass/_bootswatch.scss */
+.navbar-inverse .navbar-nav > .active > a:hover {
+  color: #333333;
+}
+/* line 45, ../sass/_bootswatch.scss */
+.navbar-brand {
+  padding-top: 12.5px;
+  padding-bottom: 12.5px;
+  line-height: 1.9;
+}
+
+@media (min-width: 768px) {
+  /* line 54, ../sass/_bootswatch.scss */
+  .navbar .navbar-nav > li > a {
+    padding: 8px 12px;
+  }
+}
+@media (max-width: 767px) {
+  /* line 62, ../sass/_bootswatch.scss */
+  .navbar .navbar-nav > li > a {
+    margin: 0;
+  }
+}
+/* line 70, ../sass/_bootswatch.scss */
+.btn {
+  font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* line 80, ../sass/_bootswatch.scss */
+legend {
+  font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* line 84, ../sass/_bootswatch.scss */
+.input-group-addon {
+  font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* line 91, ../sass/_bootswatch.scss */
+.nav .open > a,
+.nav .open > a:hover,
+.nav .open > a:focus {
+  border: 1px solid #ddd;
+}
+
+/* line 98, ../sass/_bootswatch.scss */
+.pagination {
+  font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+/* line 102, ../sass/_bootswatch.scss */
+.pagination-lg > li > a, .pagination-lg > li > span {
+  padding: 14px 24px;
+}
+
+/* line 108, ../sass/_bootswatch.scss */
+.pager {
+  font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+/* line 112, ../sass/_bootswatch.scss */
+.pager a {
+  color: #333333;
+}
+/* line 116, ../sass/_bootswatch.scss */
+.pager a:hover {
+  border-color: transparent;
+  color: #fff;
+}
+/* line 121, ../sass/_bootswatch.scss */
+.pager .disabled a {
+  border-color: #ddd;
+}
+
+/* line 128, ../sass/_bootswatch.scss */
+.close {
+  color: #fff;
+  text-decoration: none;
+  text-shadow: none;
+  opacity: 0.4;
+}
+/* line 134, ../sass/_bootswatch.scss */
+.close:hover, .close:focus {
+  color: #fff;
+  opacity: 1;
+}
+
+/* line 142, ../sass/_bootswatch.scss */
+.alert .alert-link {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* line 148, ../sass/_bootswatch.scss */
+.label {
+  font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+}
+/* line 152, ../sass/_bootswatch.scss */
+.label-default {
+  border: 1px solid #ddd;
+  color: #333333;
+}
+
+/* line 159, ../sass/_bootswatch.scss */
+.badge {
+  padding: 1px 7px 5px;
+  vertical-align: 2px;
+  font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+}
+
+/* line 173, ../sass/_bootswatch.scss */
+.panel-default .close {
+  color: #333333;
+}
+
+/* line 180, ../sass/_bootswatch.scss */
+.modal .close {
+  color: #333333;
+}
+
+/* line 5, ../sass/style.scss */
+body,
+html {
+  width: 100%;
+  height: 100%;
+}
+
+/* line 12, ../sass/style.scss */
+.jumbotron {
+  padding-top: 50px;
+  /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+  text-align: center;
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../images/cupcakes.jpeg);
+  background-position: center;
+  background-size: cover;
+}
+/* line 18, ../sass/style.scss */
+.jumbotron h1, .jumbotron p {
+  color: white;
+}
+
+/* line 23, ../sass/style.scss */
+#header {
+  color: #f0f0ff;
+  background-color: rgba(0, 0, 65, 0.5);
+}
+
+/* line 28, ../sass/style.scss */
+#sub-header {
+  color: rgba(0, 0, 65, 0.5);
+  background-color: #f0f0ff;
+}
+
+/* line 33, ../sass/style.scss */
+.intro-message {
+  position: relative;
+  padding-top: 20%;
+}
+
+/* line 38, ../sass/style.scss */
+.intro-divider {
+  color: #fff;
+}
+
+/* line 42, ../sass/style.scss */
+.banner-social-buttons {
+  float: right;
+  margin-top: 0;
+}
+
+/*# sourceMappingURL=style.css.map */
