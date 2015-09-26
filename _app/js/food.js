@@ -13,13 +13,40 @@ Food.getRecipes = function(ingredients) {
             "X-Mashape-Key": "jis02SUQJVmsh25L1vfXvYhJAvxyp1AaDFAjsndi1cy5fhnK8H"
         }
     }).then(function(data) {
-        
-        Food.getInsta(data[0].title);
+
+         
         deferred.resolve(data);
     });
     return deferred.promise();
 }
-Food.getRecipes("milk, eggs");
+
+Food.getIngredients = function(ingredients) {
+    var ing="";
+    for(var i=0; i<ingredients.length;i++){
+        ing += ingredients[i];
+        ing +="\n";
+    }
+    var deferred = $.Deferred();
+    $.ajax({
+        url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/parseIngredients ",
+        type: "POST",
+        headers: {
+            "X-Mashape-Key": "jis02SUQJVmsh25L1vfXvYhJAvxyp1AaDFAjsndi1cy5fhnK8H",
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        data : {
+            ingredientList:ing,
+            servings :1
+        } 
+
+    }).then(function(data){
+       
+        deferred.resolve(data)
+
+    });
+     return deferred.promise();
+}
+Food.getIngredients(["pork","milk","salt"]);
 
 Food.getInsta = function(tag) {
     tag = tag.replace(" ", "");
@@ -40,8 +67,10 @@ Food.getInsta = function(tag) {
         for (var i = 0; i < data.data.length; i++) {
             imgArray.push(data.data[i].images.standard_resolution.url);
         }
-        
+
         deferred.resolve(imgArray);
     });
     return deferred.promise();
 }
+
+ 
