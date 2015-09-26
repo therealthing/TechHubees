@@ -213,7 +213,7 @@ Image placeholders: placemi.com
 #t-cards {
   padding-top: 80px;
   padding-bottom: 80px;
-  dispaly: flex;
+  display: flex;
   justify-content: center;
 }
 
