@@ -23,18 +23,34 @@ var EventSystem = (function() {
   };
 }());
 var Ingredient = React.createClass({
-    componentWillMount: function(){
-      console.log('pulling photo for '+this.props.label);
+    getInitialState: function(){
+      return {
+        photo: ''
+      }
+    },
+    getDefaultProps: function(){
+      return {
+        label: null
+      }
+    },
+    componentDidMount: function(){
+      this.mymethod();
+    },
+    componentDidUpdate: function(){
+      this.mymethod();
     },
     render: function(){
       return (<div className="col-md-3 col-sm-6 hero-feature">
                   <div className="thumbnail">
-                      <img src="{this.props.photo}" alt={this.props.label}/>
+                      <img src={this.state.photo} alt={this.props.label}/>
                       <div className="caption">
                           <h3>{this.props.label}</h3>
                       </div>
                   </div>
               </div>);
+    },
+    mymethod: function() {
+      console.log('pulling photo for '+this.props.label);
     }
 });
 var ListingIngredients = React.createClass({
@@ -49,7 +65,7 @@ var ListingIngredients = React.createClass({
           {this.props.ingredients.filter(function(ingredient) {
             return ingredient !== '';
           }).map(function(ingredient, i){
-            return <Ingredient key={i} label={ingredient} photo="png" />;
+            return <Ingredient key={i} label={ingredient} />;
           }
           )}
         </div>
@@ -68,6 +84,8 @@ var FoodApp = React.createClass({
           //api calls
           console.log('comp will mount');
           window.addEventListener('keydown', this.handleChange);
+
+          this.handleChange = _.debounce(this.handleChange, 500);
         },
         componentDidMount: function(){
           console.log('comp did mount');
@@ -82,9 +100,7 @@ var FoodApp = React.createClass({
           window.removeEventListener('keydown', this.handleChange);
         },
         render: function() {
-          var message =
-            'React is running successfully';
-
+         
           return (
               <section>
                 <header className="jumbotron hero-spacer">

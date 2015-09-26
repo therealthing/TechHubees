@@ -23,18 +23,34 @@ var EventSystem = (function() {
   };
 }());
 var Ingredient = React.createClass({displayName: "Ingredient",
-    componentWillMount: function(){
-      console.log('pulling photo for '+this.props.label);
+    getInitialState: function(){
+      return {
+        photo: ''
+      }
+    },
+    getDefaultProps: function(){
+      return {
+        label: null
+      }
+    },
+    componentDidMount: function(){
+      this.mymethod();
+    },
+    componentDidUpdate: function(){
+      this.mymethod();
     },
     render: function(){
       return (React.createElement("div", {className: "col-md-3 col-sm-6 hero-feature"}, 
                   React.createElement("div", {className: "thumbnail"}, 
-                      React.createElement("img", {src: "{this.props.photo}", alt: this.props.label}), 
+                      React.createElement("img", {src: this.state.photo, alt: this.props.label}), 
                       React.createElement("div", {className: "caption"}, 
                           React.createElement("h3", null, this.props.label)
                       )
                   )
               ));
+    },
+    mymethod: function() {
+      console.log('pulling photo for '+this.props.label);
     }
 });
 var ListingIngredients = React.createClass({displayName: "ListingIngredients",
@@ -49,7 +65,7 @@ var ListingIngredients = React.createClass({displayName: "ListingIngredients",
           this.props.ingredients.filter(function(ingredient) {
             return ingredient !== '';
           }).map(function(ingredient, i){
-            return React.createElement(Ingredient, {key: i, label: ingredient, photo: "png"});
+            return React.createElement(Ingredient, {key: i, label: ingredient});
           }
           )
         )
@@ -68,6 +84,8 @@ var FoodApp = React.createClass({displayName: "FoodApp",
           //api calls
           console.log('comp will mount');
           window.addEventListener('keydown', this.handleChange);
+
+          this.handleChange = _.debounce(this.handleChange, 500);
         },
         componentDidMount: function(){
           console.log('comp did mount');
@@ -82,9 +100,7 @@ var FoodApp = React.createClass({displayName: "FoodApp",
           window.removeEventListener('keydown', this.handleChange);
         },
         render: function() {
-          var message =
-            'React is running successfully';
-
+         
           return (
               React.createElement("section", null, 
                 React.createElement("header", {className: "jumbotron hero-spacer"}, 
