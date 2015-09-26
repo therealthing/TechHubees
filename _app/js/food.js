@@ -56,6 +56,8 @@ Food.getIngredients = function(ingredients) {
 
 Food.getInsta = function(tag) {
     tag = tag.replace(" ", "");
+    tag = tag.replace("'","");
+    tag = tag.replace('"',"");
     var deferred = $.Deferred();
     $.ajax({
         url: "https://api.instagram.com/v1/tags/" + tag + "/media/recent",
