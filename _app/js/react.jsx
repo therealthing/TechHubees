@@ -22,7 +22,21 @@ var EventSystem = (function() {
     }
   };
 }());
-
+var Ingredient = React.createClass({
+    componentWillMount: function(){
+      console.log('pulling photo for '+this.props.label);
+    },
+    render: function(){
+      return (<div className="col-md-3 col-sm-6 hero-feature">
+                  <div className="thumbnail">
+                      <img src="{this.props.photo}" alt={this.props.label}/>
+                      <div className="caption">
+                          <h3>{this.props.label}</h3>
+                      </div>
+                  </div>
+              </div>);
+    }
+});
 var ListingIngredients = React.createClass({
     getDefaultProps: function(){
       return {
@@ -32,18 +46,10 @@ var ListingIngredients = React.createClass({
     render: function(){
       return (
         <div className="row">
-          {this.props.ingredients.map(function(ingredient){
-            if(ingredient!='')
-              return <div className="col-md-3 col-sm-6 hero-feature">
-                  <div className="thumbnail">
-                      <img src="{ingredient.photo}" alt=""/>
-                      <div className="caption">
-                          <h3>{ingredient}</h3>
-                      </div>
-                  </div>
-              </div>;
-              else 
-                return '';
+          {this.props.ingredients.filter(function(ingredient) {
+            return ingredient !== '';
+          }).map(function(ingredient, i){
+            return <Ingredient key={i} label={ingredient} photo="png" />;
           }
           )}
         </div>
@@ -67,7 +73,6 @@ var FoodApp = React.createClass({
           console.log('comp did mount');
         },
         handleChange: function(e){
-          console.log('text changes');
           var userInput = this.refs.inputSearch.getDOMNode().value.trim();
           this.setState({
             ingredients: userInput.split(',')

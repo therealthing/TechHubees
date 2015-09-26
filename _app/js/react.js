@@ -22,7 +22,21 @@ var EventSystem = (function() {
     }
   };
 }());
-
+var Ingredient = React.createClass({displayName: "Ingredient",
+    componentWillMount: function(){
+      console.log('pulling photo for '+this.props.label);
+    },
+    render: function(){
+      return (React.createElement("div", {className: "col-md-3 col-sm-6 hero-feature"}, 
+                  React.createElement("div", {className: "thumbnail"}, 
+                      React.createElement("img", {src: "{this.props.photo}", alt: this.props.label}), 
+                      React.createElement("div", {className: "caption"}, 
+                          React.createElement("h3", null, this.props.label)
+                      )
+                  )
+              ));
+    }
+});
 var ListingIngredients = React.createClass({displayName: "ListingIngredients",
     getDefaultProps: function(){
       return {
@@ -32,18 +46,10 @@ var ListingIngredients = React.createClass({displayName: "ListingIngredients",
     render: function(){
       return (
         React.createElement("div", {className: "row"}, 
-          this.props.ingredients.map(function(ingredient){
-            if(ingredient!='')
-              return React.createElement("div", {className: "col-md-3 col-sm-6 hero-feature"}, 
-                  React.createElement("div", {className: "thumbnail"}, 
-                      React.createElement("img", {src: "{ingredient.photo}", alt: ""}), 
-                      React.createElement("div", {className: "caption"}, 
-                          React.createElement("h3", null, ingredient)
-                      )
-                  )
-              );
-              else 
-                return '';
+          this.props.ingredients.filter(function(ingredient) {
+            return ingredient !== '';
+          }).map(function(ingredient, i){
+            return React.createElement(Ingredient, {key: i, label: ingredient, photo: "png"});
           }
           )
         )
@@ -67,7 +73,6 @@ var FoodApp = React.createClass({displayName: "FoodApp",
           console.log('comp did mount');
         },
         handleChange: function(e){
-          console.log('text changes');
           var userInput = this.refs.inputSearch.getDOMNode().value.trim();
           this.setState({
             ingredients: userInput.split(',')
