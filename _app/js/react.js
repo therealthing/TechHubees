@@ -1,8 +1,6 @@
-var g_reactInstance;
-var g_applicationState = {};
-
-
 var eventQueue = {};
+
+/*dispatcher*/
 var EventSystem = (function() {
   return {
     publish: function (event, data) {
@@ -24,3 +22,37 @@ var EventSystem = (function() {
     }
   };
 }());
+
+var FoodApp = React.createClass({displayName: "FoodApp",
+        getInitialState: function() {
+          console.log('get initial state');
+          return {};
+        },
+        componentWillMount: function(){
+          //api calls
+          console.log('comp will mount');
+          window.addEventListener('keydown', this.handleChange);
+        },
+        componentDidMount: function(){
+          console.log('comp did mount');
+        },
+        componentWillUnmount: function(){
+          window.removeEventListener('keydown', this.handleChange);
+        },
+        render: function() {
+          var message =
+            'React is running successfully';
+
+          return (React.createElement("p", null, message));
+        }
+});
+
+var FoodAppFactory = React.createFactory(FoodApp);
+
+$( document ).ready(function() {
+ 
+    React.render(
+      FoodAppFactory({}),
+      document.getElementById('foodAppContainer')
+    );
+});
