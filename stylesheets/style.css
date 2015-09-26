@@ -156,42 +156,43 @@ html {
 
 /* line 12, ../sass/style.scss */
 .jumbotron {
-  padding-top: 50px;
-  /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+  height: 100%;
+  width: 100%;
+  /*padding-top: 50px; /!* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! *!/*/
   text-align: center;
   background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../images/cupcakes.jpeg);
   background-position: center;
   background-size: cover;
 }
-/* line 18, ../sass/style.scss */
+/* line 20, ../sass/style.scss */
 .jumbotron h1, .jumbotron p {
   color: white;
 }
 
-/* line 23, ../sass/style.scss */
+/* line 25, ../sass/style.scss */
 #header {
   color: #f0f0ff;
   background-color: rgba(0, 0, 65, 0.5);
 }
 
-/* line 28, ../sass/style.scss */
+/* line 30, ../sass/style.scss */
 #sub-header {
   color: rgba(0, 0, 65, 0.5);
   background-color: #f0f0ff;
 }
 
-/* line 33, ../sass/style.scss */
+/* line 35, ../sass/style.scss */
 .intro-message {
   position: relative;
   padding-top: 20%;
 }
 
-/* line 38, ../sass/style.scss */
+/* line 40, ../sass/style.scss */
 .intro-divider {
   color: #fff;
 }
 
-/* line 42, ../sass/style.scss */
+/* line 44, ../sass/style.scss */
 .banner-social-buttons {
   float: right;
   margin-top: 0;
