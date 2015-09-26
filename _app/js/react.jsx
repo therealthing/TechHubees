@@ -102,13 +102,30 @@ var ListingRecipes = React.createClass({
     }
 });
 
+var ListingInstagram = React.createClass({
+    getDefaultProps: function(){
+      return {
+
+      }
+    },
+    render: function(){
+      console.log(this.props.instagram);
+      return (
+        <div className="row">
+       
+        </div>
+      );
+    }
+});
+
 var FoodApp = React.createClass({
         getInitialState: function() {
           console.log('get initial state');
           return {
             ingredients: [],
             photos: [],
-            recipes: []
+            recipes: [],
+            instagram: []
           }
         },
         componentWillMount: function(){
@@ -133,7 +150,12 @@ var FoodApp = React.createClass({
               .then(function(data){
                 console.log(data);
                 that.setState({recipes:data});
+                Food.getInsta(data[0].title)
+                  .then(function(data){
+                    that.setState({instagram:data});
+                  })
               });  
+
             ingredientsCount = newCount;  
           }
            
@@ -169,6 +191,8 @@ var FoodApp = React.createClass({
                       <h3>You can cook</h3>
                       <hr/>
                       <ListingRecipes recipes={this.state.recipes}/>
+                      <hr/>
+                      <ListingInstagram photos={this.state.instagram}/>
                   </div>
                 </section>
             );

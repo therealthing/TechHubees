@@ -102,13 +102,30 @@ var ListingRecipes = React.createClass({displayName: "ListingRecipes",
     }
 });
 
+var ListingInstagram = React.createClass({displayName: "ListingInstagram",
+    getDefaultProps: function(){
+      return {
+
+      }
+    },
+    render: function(){
+      console.log(this.props.instagram);
+      return (
+        React.createElement("div", {className: "row"}
+       
+        )
+      );
+    }
+});
+
 var FoodApp = React.createClass({displayName: "FoodApp",
         getInitialState: function() {
           console.log('get initial state');
           return {
             ingredients: [],
             photos: [],
-            recipes: []
+            recipes: [],
+            instagram: []
           }
         },
         componentWillMount: function(){
@@ -133,7 +150,12 @@ var FoodApp = React.createClass({displayName: "FoodApp",
               .then(function(data){
                 console.log(data);
                 that.setState({recipes:data});
+                Food.getInsta(data[0].title)
+                  .then(function(data){
+                    that.setState({instagram:data});
+                  })
               });  
+
             ingredientsCount = newCount;  
           }
            
@@ -168,7 +190,9 @@ var FoodApp = React.createClass({displayName: "FoodApp",
                       React.createElement(ListingIngredients, {ingredients: this.state.ingredients, photos: this.state.photos}), 
                       React.createElement("h3", null, "You can cook"), 
                       React.createElement("hr", null), 
-                      React.createElement(ListingRecipes, {recipes: this.state.recipes})
+                      React.createElement(ListingRecipes, {recipes: this.state.recipes}), 
+                      React.createElement("hr", null), 
+                      React.createElement(ListingInstagram, {photos: this.state.instagram})
                   )
                 )
             );
