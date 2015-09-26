@@ -31,20 +31,19 @@ var ListingIngredients = React.createClass({displayName: "ListingIngredients",
     },
     render: function(){
       return (
-        React.createElement("div", null, 
-          this.props.ingredients.map(function(ingredint){
-            return React.createElement("div", {className: "col-md-3 col-sm-6 hero-feature"}, 
-                React.createElement("div", {className: "thumbnail"}, 
-                    React.createElement("img", {src: "http://placehold.it/800x500", alt: ""}), 
-                    React.createElement("div", {className: "caption"}, 
-                        React.createElement("h3", null, ingredint), 
-                        React.createElement("p", null, "Lorem ipsum dolor sit amet, consectetur adipisicing elit."), 
-                        React.createElement("p", null, 
-                            React.createElement("a", {href: "#", className: "btn btn-primary"}, "Buy Now!"), " ", React.createElement("a", {href: "#", className: "btn btn-default"}, "More Info")
-                        )
-                    )
-                )
-            );
+        React.createElement("div", {className: "row"}, 
+          this.props.ingredients.map(function(ingredient){
+            if(ingredient!='')
+              return React.createElement("div", {className: "col-md-3 col-sm-6 hero-feature"}, 
+                  React.createElement("div", {className: "thumbnail"}, 
+                      React.createElement("img", {src: "{ingredient.photo}", alt: ""}), 
+                      React.createElement("div", {className: "caption"}, 
+                          React.createElement("h3", null, ingredient)
+                      )
+                  )
+              );
+              else 
+                return '';
           }
           )
         )
@@ -69,8 +68,9 @@ var FoodApp = React.createClass({displayName: "FoodApp",
         },
         handleChange: function(e){
           console.log('text changes');
+          var userInput = this.refs.inputSearch.getDOMNode().value.trim();
           this.setState({
-            ingredients: this.refs.inputSearch.getDOMNode().value.split(' ')
+            ingredients: userInput.split(',')
           });
         },
         componentWillUnmount: function(){
@@ -81,17 +81,28 @@ var FoodApp = React.createClass({displayName: "FoodApp",
             'React is running successfully';
 
           return (
-                React.createElement("div", null, 
-                  React.createElement("div", {className: "input-group"}, 
-                      React.createElement("input", {type: "text", ref: "inputSearch", className: "form-control input-lg", placeholder: "Search for...", onChange: this.handleChange}), 
-                        React.createElement("span", {className: "input-group-btn"}, 
-                          React.createElement("a", {className: "btn btn-primary btn-lg btn-success", onClick: this.handleChange}, "Fetch food!")
+              React.createElement("section", null, 
+                React.createElement("header", {className: "jumbotron hero-spacer"}, 
+                  React.createElement("h1", null, "Hurry up! Your food is getting cold."), 
+                  React.createElement("p", null, "Input your ingredients, see what people have done with them, on Instagram."), 
+          
+                    React.createElement("div", {className: "row formfield"}, 
+                      React.createElement("div", {className: "col-lg-12 bigwidth"}, 
+                       
+                        React.createElement("div", {className: "input-group"}, 
+                          React.createElement("input", {type: "text", ref: "inputSearch", className: "form-control input-lg", placeholder: "Search for...", onChange: this.handleChange}), 
+                            React.createElement("span", {className: "input-group-btn"}, 
+                              React.createElement("a", {className: "btn btn-primary btn-lg btn-success", onClick: this.handleChange}, "Fetch food!")
+                            )
                         )
+                           
+                      )
+                    )
                   ), 
                   React.createElement("div", {className: "row text-center"}, 
-                    React.createElement(ListingIngredients, {ingredients: this.state.ingredients})
+                      React.createElement(ListingIngredients, {ingredients: this.state.ingredients})
                   )
-                )  
+                )
             );
         }
 });

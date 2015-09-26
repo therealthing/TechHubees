@@ -31,20 +31,19 @@ var ListingIngredients = React.createClass({
     },
     render: function(){
       return (
-        <div>
-          {this.props.ingredients.map(function(ingredint){
-            return <div className="col-md-3 col-sm-6 hero-feature">
-                <div className="thumbnail">
-                    <img src="http://placehold.it/800x500" alt=""/>
-                    <div className="caption">
-                        <h3>{ingredint}</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                        <p>
-                            <a href="#" className="btn btn-primary">Buy Now!</a> <a href="#" className="btn btn-default">More Info</a>
-                        </p>
-                    </div>
-                </div>
-            </div>;
+        <div className="row">
+          {this.props.ingredients.map(function(ingredient){
+            if(ingredient!='')
+              return <div className="col-md-3 col-sm-6 hero-feature">
+                  <div className="thumbnail">
+                      <img src="{ingredient.photo}" alt=""/>
+                      <div className="caption">
+                          <h3>{ingredient}</h3>
+                      </div>
+                  </div>
+              </div>;
+              else 
+                return '';
           }
           )}
         </div>
@@ -69,8 +68,9 @@ var FoodApp = React.createClass({
         },
         handleChange: function(e){
           console.log('text changes');
+          var userInput = this.refs.inputSearch.getDOMNode().value.trim();
           this.setState({
-            ingredients: this.refs.inputSearch.getDOMNode().value.split(' ')
+            ingredients: userInput.split(',')
           });
         },
         componentWillUnmount: function(){
@@ -81,17 +81,28 @@ var FoodApp = React.createClass({
             'React is running successfully';
 
           return (
-                <div>  
-                  <div className="input-group">
-                      <input type="text" ref="inputSearch" className="form-control input-lg" placeholder="Search for..." onChange={this.handleChange}/>
-                        <span className="input-group-btn">
-                          <a className="btn btn-primary btn-lg btn-success" onClick={this.handleChange}>Fetch food!</a>
-                        </span>
-                  </div>
+              <section>
+                <header className="jumbotron hero-spacer">
+                  <h1>Hurry up! Your food is getting cold.</h1>
+                  <p>Input your ingredients, see what people have done with them, on Instagram.</p>
+          
+                    <div className="row formfield" >
+                      <div className="col-lg-12 bigwidth">
+                       
+                        <div className="input-group">
+                          <input type="text" ref="inputSearch" className="form-control input-lg" placeholder="Search for..." onChange={this.handleChange}/>
+                            <span className="input-group-btn">
+                              <a className="btn btn-primary btn-lg btn-success" onClick={this.handleChange}>Fetch food!</a>
+                            </span>
+                        </div> 
+                           
+                      </div>
+                    </div>    
+                  </header>
                   <div className="row text-center">
-                    <ListingIngredients ingredients={this.state.ingredients}/>
+                      <ListingIngredients ingredients={this.state.ingredients}/>
                   </div>
-                </div>  
+                </section>
             );
         }
 });
